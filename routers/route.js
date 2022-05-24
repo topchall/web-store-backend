@@ -5,7 +5,7 @@ module.exports = function (app) {
 
       function isUserAllowed(req, res, next) {
             sess = req.session;
-            if (true) {
+            if (sess.authenticated) {
                   return next();
             }
             else { res.redirect('/login'); }
