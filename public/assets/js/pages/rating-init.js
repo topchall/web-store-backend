@@ -15,7 +15,7 @@ $(document).ready(function () {
     });
 
     // CSS Stars
-    $('#rating-css').barrating({
+    $('.rating-css').barrating({
         theme: 'css-stars',
         showSelectedRating: false
     });

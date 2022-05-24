@@ -1,6 +1,5 @@
 const CategoryController = require('../controllers/CategoryController');
-const categoryController = require('../controllers/CategoryController');
-const Category = require('../models/Category');
+const ProductController = require('../controllers/ProductController');
 
 module.exports = function (app) {
 
@@ -16,16 +15,23 @@ module.exports = function (app) {
             res.redirect('categories');
       });
       
-      app.get('/categories', isUserAllowed, categoryController.index);
+      app.get('/categories', isUserAllowed, CategoryController.index);
 
       app.post('/categories/create', isUserAllowed, CategoryController.create);
 
       app.post('/categories/delete', isUserAllowed, CategoryController.delete);
 
-      app.get('/products', isUserAllowed, function (req, res) {
-            res.locals = { title: 'Datatables', username: req.session.username };
-            res.render('Tables/tables-datatable');
-      });
+      app.get('/products', isUserAllowed, ProductController.index);
+
+      app.get('/products/create', isUserAllowed, ProductController.create);
+
+      app.post('/products/store', isUserAllowed, ProductController.store);
+
+      app.post('/products/delete', isUserAllowed, ProductController.delete);
+
+      app.get('/products/edit/:id', isUserAllowed, ProductController.edit);
+
+      app.post('/products/update/:id', isUserAllowed, ProductController.update);
 
       app.get('/dashboard-2', isUserAllowed, function (req, res) {
             res.locals = { title: 'Dashboard Two' };

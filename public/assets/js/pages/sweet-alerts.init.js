@@ -105,7 +105,7 @@ File: Sweetalert Js File
             Swal.fire({
                 title: 'Sweet!',
                 text: 'Modal with a custom image.',
-                imageUrl: 'public/assets/images/logo-dark.png',
+                imageUrl: '/public/assets/images/logo-dark.png',
                 imageHeight: 20,
                 confirmButtonColor: "#5b73e8",
                 animation: false

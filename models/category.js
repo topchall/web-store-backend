@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../config/db')
+const Product = require('./product')
   
 const Category = sequelize.define('categories', {
   
@@ -19,5 +20,7 @@ const Category = sequelize.define('categories', {
      createdAt: Sequelize.DATE,
      updatedAt: Sequelize.DATE,
 })
+
+// Category.hasMany(Product)
   
 module.exports = Category

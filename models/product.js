@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../config/db')
+const Category = require('./category')
   
-const Category = sequelize.define('categories', {
+const Product = sequelize.define('products', {
   
     id:{
   
@@ -13,11 +14,28 @@ const Category = sequelize.define('categories', {
   
         primaryKey:true
     },
+
+    categoryId: { type: Sequelize.INTEGER, allowNull:false },
   
-    categoryName: { type: Sequelize.STRING, allowNull:false },
+    caption: { type: Sequelize.STRING, allowNull:false },
+  
+    price: { type: Sequelize.DOUBLE, defaultValue: 0 },
+  
+    quantity: { type: Sequelize.INTEGER, defaultValue: 0 },
+  
+    description: { type: Sequelize.TEXT, allowNull:false },
+  
+    rating: { type: Sequelize.DOUBLE, defaultValue: 0 },
+  
+    img: { type: Sequelize.STRING },
   
      createdAt: Sequelize.DATE,
      updatedAt: Sequelize.DATE,
-})
+
+});
+
+// Product.belongsTo(Category, {
+//     foreignKey: 'categoryId'
+// });
   
-module.exports = Category
+module.exports = Product

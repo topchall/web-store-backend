@@ -27,6 +27,7 @@ app.use(i18n({
 var AuthController = require('./controllers/AuthController');
 const Admin = require('./models/admin');
 const Category = require('./models/category');
+const Product = require('./models/product');
 sequelize.sync()  
 
 // import Router file

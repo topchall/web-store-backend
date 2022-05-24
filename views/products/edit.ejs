@@ -1,0 +1,114 @@
+<%- contentFor('HeaderCss') %>
+<link href="/public/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="/public/assets/libs/spectrum-colorpicker2/spectrum.min.css" rel="stylesheet" type="text/css">
+<link href="/public/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+
+<%- contentFor('breadcrumb') %>
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0">Edit a Product</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<%- contentFor('body') %>
+
+<div class="row">
+    <% if(error.length> 0) { %>
+        <div class="alert alert-danger text-center mb-4 flash alert-dismissible" role="alert">
+            <%= error %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+        </div>
+    <% } %>
+    <% if(message.length> 0) { %>
+        <div class="alert alert-success text-center mb-4 flash alert-dismissible" role="alert">
+            <%= message %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+        </div>
+    <% } %>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                
+                <h4 class="card-title" style="display: flex;justify-content: flex-start;">
+                    <a class="btn btn-outline-primary waves-effect waves-light" href="/products"><i class="uil-left-arrow-to-left"></i>&nbsp;Back to Products List</a>
+                </h4>
+
+                <form method="post" action="/products/update/<%= product.id %>" enctype="multipart/form-data">
+                    <div class="mb-3 row">
+                        <label class="col-md-2 col-form-label">Category</label>
+                        <div class="col-md-10">
+                            <select class="form-select" name="categoryId" required>
+                                <option disabled>Select</option>
+                                <% console.log(categories.length) %>
+                                <% categories.map((category) => { %>
+                                    <option value="<%= category.id %>" <% if(category.id == product.categoryId) { %> selected <% } %> ><%= category.categoryName %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="caption" class="col-md-2 col-form-label">Caption</label>
+                        <div class="col-md-10">
+                            <input class="form-control" value="<%= product.caption %>" type="text" id="caption" name="caption" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="priceInput" class="col-md-2 col-form-label">Price</label>
+                        <div class="col-md-10">
+                            <input class="form-control" value="<%= product.price %>" type="text" id="priceInput" name="price" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="quantityInput" class="col-md-2 col-form-label">Quantity</label>
+                        <div class="col-md-10">
+                        <input type="number" class="form-control" value="<%= product.quantity %>" id="quantityInput" name="quantity" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="textarea" class="col-md-2 col-form-label">Description</label>
+                        <div class="col-md-10">
+                            <textarea id="textarea" class="form-control" name="description" rows="3" placeholder="about a book" required><%= product.description %></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="customFile" class="col-md-2 col-form-label">Image File</label>
+                        <div class="col-md-10">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="imgfile" id="customFile">
+                              </div>                            
+                        </div>
+                    </div>
+
+                    <div class="row mt-6" style="justify-content: center">
+                        <button type="submit" class="btn btn-primary w-md btn-block col-10">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+<!-- end row -->
+
+<%- contentFor('FooterJs') %>
+<script src="/public/assets/libs/select2/js/select2.min.js"></script>
+<script src="/public/assets/libs/spectrum-colorpicker2/spectrum.min.js"></script>
+<script src="/public/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+
+<script src="/public/assets/js/pages/form-advanced.init.js"></script>
+
+<script>
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+
+<%- contentFor('BottomJs') %>
