@@ -21,6 +21,11 @@ const Category = sequelize.define('categories', {
      updatedAt: Sequelize.DATE,
 })
 
-// Category.hasMany(Product)
+Category.hasMany(Product, {
+    foreignKey: 'categoryId', 
+    as: 'Products',
+    onDelete: 'RESTRICT',
+    onUpdate: 'RESTRICT'
+});
   
 module.exports = Category

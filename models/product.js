@@ -15,7 +15,13 @@ const Product = sequelize.define('products', {
         primaryKey:true
     },
 
-    categoryId: { type: Sequelize.INTEGER, allowNull:false },
+    categoryId: { 
+        type: Sequelize.INTEGER, 
+        references: {
+            model: 'categories',
+            key: "id"
+        }
+    },
   
     caption: { type: Sequelize.STRING, allowNull:false },
   
@@ -37,5 +43,13 @@ const Product = sequelize.define('products', {
 // Product.belongsTo(Category, {
 //     foreignKey: 'categoryId'
 // });
+Product.associate = (models) => {
+    Product.belongsTo(models.Category, {foreignKey: 'categroyId', as: 'category'});
+  };
+// Product.belongsTo(Category, 
+//     {
+//         as: 'Category', 
+//         foreignKey: 'categoryId'
+//     });
   
 module.exports = Product
