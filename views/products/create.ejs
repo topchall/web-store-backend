@@ -78,11 +78,10 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="customFile" class="col-md-2 col-form-label">Image File</label>
+                        <label for="fileINput" class="col-md-2 col-form-label">Image File</label>
                         <div class="col-md-10">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="imgfile" id="customFile" required>
-                              </div>                            
+                            <input type="file" class="form-control" id="fileInput" name="imgfile" onchange="onFileSelected(event)" />
+                            <img id="productLogo" height="200" style="margin-top: 10px; display: none;">
                         </div>
                     </div>
 
@@ -109,6 +108,21 @@
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+    
+    function onFileSelected(event) {
+        var selectedFile = event.target.files[0];
+        var reader = new FileReader();
+
+        var imgtag = document.getElementById("productLogo");
+        imgtag.title = selectedFile.name;
+
+        reader.onload = function(event) {
+            imgtag.src = event.target.result;
+            imgtag.style.display = 'block';
+        };
+
+        reader.readAsDataURL(selectedFile);
+    }
 </script>
 
 <%- contentFor('BottomJs') %>

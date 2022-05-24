@@ -35,7 +35,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                
+
                 <h4 class="card-title" style="display: flex;justify-content: flex-start;">
                     <a class="btn btn-outline-primary waves-effect waves-light" href="/products"><i class="uil-left-arrow-to-left"></i>&nbsp;Back to Products List</a>
                 </h4>
@@ -78,11 +78,10 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="customFile" class="col-md-2 col-form-label">Image File</label>
+                        <label for="fileINput" class="col-md-2 col-form-label">Image File</label>
                         <div class="col-md-10">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="imgfile" id="customFile">
-                              </div>                            
+                            <input type="file" class="form-control" id="fileInput" name="imgfile" onchange="onFileSelected(event)" />
+                            <img id="productLogo" height="200" style="margin-top: 10px;" src="/<%= product.img %>">
                         </div>
                     </div>
 
@@ -90,7 +89,6 @@
                         <button type="submit" class="btn btn-primary w-md btn-block col-10">Submit</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div> <!-- end col -->
@@ -101,14 +99,29 @@
 <script src="/public/assets/libs/select2/js/select2.min.js"></script>
 <script src="/public/assets/libs/spectrum-colorpicker2/spectrum.min.js"></script>
 <script src="/public/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
-
-<script src="/public/assets/js/pages/form-advanced.init.js"></script>
+<script src="/public/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
 
 <script>
-    $(".custom-file-input").on("change", function() {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
+    $(document).ready(function(){
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    })
+    
+    function onFileSelected(event) {
+        var selectedFile = event.target.files[0];
+        var reader = new FileReader();
+
+        var imgtag = document.getElementById("productLogo");
+        imgtag.title = selectedFile.name;
+
+        reader.onload = function(event) {
+            imgtag.src = event.target.result;
+        };
+
+        reader.readAsDataURL(selectedFile);
+    }
 </script>
 
 <%- contentFor('BottomJs') %>
