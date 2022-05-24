@@ -62,63 +62,6 @@ module.exports = {
 	},
 
 	update: function (req, res) {
-		// const id = req.params.id;
-		// Product.update({
-		//   categoryId: req.body.categoryId,
-		//   caption: req.body.caption,
-		//   price: req.body.price,
-		//   quantity: req.body.quantity,
-		//   description: req.body.description
-		// }, {
-		//   where: { id: id }
-		// })
-		//   .then(num => {
-		// 	if (num == 1) {
-		// 		let newpath = '';
-		// 		const formidablee = require('formidable');
-		// 		const formm = new formidablee.IncomingForm();
-		// 		formm.parse(req, function (err, fields, files) {
-		// 			if (files.imgfile){
-		// 				const oldpath = files.imgfile.filepath;
-		// 				newpath = 'public/logos/' + files.imgfile.originalFilename;
-		// 				console.log(`old: ${oldpath} \n new: ${newpath} `)
-		// 				fs.copyFile(oldpath, newpath, function (err) {
-		// 					if (err){
-		// 					  req.flash('error', err.message)
-		// 						return res.redirect(`/products/edit/${id}`);
-		// 					}
-			  
-		// 					Product.update({
-		// 					  img: newpath
-		// 					  }, {
-		// 						where: { id: id }
-		// 					  })
-		// 					  .then(async () => {
-		// 						req.flash('message', 'Updated a product successfully.')
-		// 						return res.redirect(`/products/edit/${id}`);
-		// 					  })
-		// 					  .catch((err => {
-		// 						  req.flash('error', err.message)
-		// 						  return res.redirect(`/products/edit/${id}`);
-		// 					  }))
-		// 				});
-		// 			}
-					
-		// 		});
-				
-		// 		req.flash('message', 'Updated a product successfully.')
-		// 		return res.redirect(`/products/edit/${id}`);
-		// 	} else {
-		// 		req.flash('error', 'Failed update.')
-		// 		return res.redirect(`/products/edit/${id}`);
-		// 	}
-		//   })
-		//   .catch(err => {
-		// 	req.flash('error', err.message)
-		// 	return res.redirect(`/products/edit/${id}`);
-		//   });
-
-
 		let newpath = '';
 		const id = req.params.id;
 		const form = new formidable.IncomingForm();

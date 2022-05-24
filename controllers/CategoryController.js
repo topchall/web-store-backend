@@ -1,4 +1,5 @@
 const Category = require('../models/category');
+const Product = require('../models/product');
 
 module.exports = {
 	index: function(req, res) {
@@ -26,11 +27,20 @@ module.exports = {
 	},
   
 	delete: function(req, res) {
+		const id = req.body.categoryId;
 		Category.destroy({
-			where: {id: req.body.categoryId}
+			where: {id}
 		  })
 		.then(() => {
-		  res.end();
+			Product.destroy({
+				where: {categoryId: id}
+			}).then(()=>{
+				return res.end()
+			}).catch(()=>{
+				return res.end(500);
+			})
+		}).catch(()=>{
+			return res.end(500)
 		})
 	}
   }
